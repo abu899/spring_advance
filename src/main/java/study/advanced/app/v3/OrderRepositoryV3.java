@@ -1,22 +1,21 @@
-package study.advanced.app.v2;
+package study.advanced.app.v3;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import study.advanced.app.trace.TraceId;
+import study.advanced.app.logtrace.LogTrace;
 import study.advanced.app.trace.TraceStatus;
-import study.advanced.app.trace.hellotrace.HelloTraceV2;
 
 @Repository
 @RequiredArgsConstructor
-public class OrderRepositoryV2 {
+public class OrderRepositoryV3 {
 
-    private final HelloTraceV2 trace;
+    private final LogTrace trace;
 
-    public void save(TraceId traceId, String itemId) {
+    public void save(String itemId) {
 
         TraceStatus status = null;
         try{
-            status = trace.beginSync(traceId, "OrderRepository.save()");
+            status = trace.begin("OrderRepository.save()");
             if (itemId.equals("ex")) {
                 throw new IllegalStateException("Throw exception");
             }
