@@ -12,8 +12,8 @@ public class OrderControllerProxyV2 {
 
     private final OrderServiceProxyV2 orderService;
 
-    public OrderControllerProxyV2(OrderServiceProxyV2 orderServiceV1) {
-        this.orderService = orderServiceV1;
+    public OrderControllerProxyV2(OrderServiceProxyV2 orderServiceV2) {
+        this.orderService = orderServiceV2;
     }
 
     @GetMapping("/v2/request")
