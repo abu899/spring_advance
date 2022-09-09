@@ -6,11 +6,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import study.proxy.app.logtrace.LogTrace;
 import study.proxy.app.logtrace.ThreadLocalLogTrace;
-import study.proxy.config.v1_proxy.ConcreteProxyConfig;
+import study.proxy.config.v2_dynamicproxy.DynamicProxyFilterConfig;
 
 //@Import({AppV1Config.class, AppV2Config.class})
 //@Import(InterfaceProxyConfig.class)
-@Import(ConcreteProxyConfig.class)
+//@Import(ConcreteProxyConfig.class)
+//@Import(DynamicProxyBasicConfig.class)
+@Import(DynamicProxyFilterConfig.class)
 @SpringBootApplication(scanBasePackages = "study.proxy.app")
 public class ProxyApplication {
 
