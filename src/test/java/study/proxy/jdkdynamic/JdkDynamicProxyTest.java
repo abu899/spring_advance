@@ -2,7 +2,6 @@ package study.proxy.jdkdynamic;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import study.jdkdynamic.code.*;
 import study.proxy.jdkdynamic.code.*;
 
 import java.lang.reflect.Proxy;
