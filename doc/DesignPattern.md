@@ -4,7 +4,7 @@
 
 ## Template Method Pattern
 
-<p align="center"><img src="/img/dp_1.png" width="80%"></p>
+<p align="center"><img src="/img/design_pattern/dp_1.png" width="80%"></p>
 
 - 목적
   - 작업에서 알고리즘의 골격(템플릿)을 정의하고 하위 클래스로 구현한다. 
@@ -22,7 +22,7 @@
 
 ## Strategy Pattern
 
-<p align="center"><img src="/img/dp_2.png" width="80%"></p>
+<p align="center"><img src="/img/design_pattern/dp_2.png" width="80%"></p>
 
 - 목적
   - `Context`는 변하지 않는 템플릿 역할을 하고, 변하는 부분은 `Strategy`로 알고리즘 역할을 한다
@@ -63,9 +63,9 @@ ContextV2 뒤에서 `Strategy`가 실행된다. 자바에서는 실행가능한 
 
 ## Proxy
 
-<p align="center"><img src="/img/proxy.png" width="80%"></p>
+<p align="center"><img src="/img/design_pattern/proxy.png" width="80%"></p>
 
-<p align="center"><img src="/img/proxy_1.png" width="80%"></p>
+<p align="center"><img src="/img/design_pattern/proxy_1.png" width="80%"></p>
 
 직접 호출 대신 간접 호출을 하면 `proxy`가 중간에서 여러가지 일을 할 수 있다는 장점이 있다.
 또한, 프록시는 또다른 프록시를 호출(`Proxy Chain`)할 수 있으며, 결과적으로 서버는 그 결과만 받으면 된다.
@@ -87,7 +87,7 @@ GOF 디자인 패턴에서는 프록시 패턴과 데코레이터 패턴 모두 
 
 ### Proxy Pattern
 
-<p align="center"><img src="/img/pp.png" width="80%"></p>
+<p align="center"><img src="/img/design_pattern/pp.png" width="80%"></p>
 
 프록시 도입을 통해 client 코드는 전혀 손대지 않고, 접근제어를 할 수 있다.
 또한 client 는 프록시가 적용됬는지, 실제 객체가 적용됬는지 알 수 없다는 장점 또한 존재한다.
@@ -96,9 +96,9 @@ GOF 디자인 패턴에서는 프록시 패턴과 데코레이터 패턴 모두 
 
 ### Decorator Pattern
 
-<p align="center"><img src="/img/deco.png" width="80%"></p>
+<p align="center"><img src="/img/design_pattern/deco.png" width="80%"></p>
 
-<p align="center"><img src="/img/deco_1.png" width="80%"></p>
+<p align="center"><img src="/img/design_pattern/deco_1.png" width="80%"></p>
 
 데코레이터 패턴을 통해 클라이언트 변경없이 새로운 기능을 지속적으로 추가할 수 있다.
 

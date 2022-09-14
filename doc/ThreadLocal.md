@@ -14,13 +14,13 @@
 
 해당 쓰레드만 접근할 수 있는 특별한 저장소, 즉, 쓰레드마다 별도의 데이터 저장소를 사용하는 것.
 
-<p align="center"><img src="/img/tl_1.png" width="80%"></p>
-<p align="center"><img src="/img/tl_2.png" width="80%"></p>
-<p align="center"><img src="/img/tl_3.png" width="80%"></p>
+<p align="center"><img src="/img/threadlocal/tl_1.png" width="80%"></p>
+<p align="center"><img src="/img/threadlocal/tl_2.png" width="80%"></p>
+<p align="center"><img src="/img/threadlocal/tl_3.png" width="80%"></p>
 
 ### ThreadLocal 주의사항
 
-<p align="center"><img src="/img/tl_4.png" width="80%"></p>
+<p align="center"><img src="/img/threadlocal/tl_4.png" width="80%"></p>
 
 - ThreadLocal 사용 시 반드시 `ThreadLocal.remove()`를 호출하여 저장된 값을 제거해줘야한다.
 - remove 를 하지 않는 다면ThreadLocal 내에 데이터가 저장되어 있기 때문에, 쓰레드풀을 사용하는 경우 쓰레기 값이 들어간 상태로 쓰레드가 반납되고 

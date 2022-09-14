@@ -20,8 +20,8 @@
 
 ## JDK 동적 프록시
 
-<p align="center"><img src="/img/jdk.png" width="80%"></p>
-<p align="center"><img src="/img/jdk_1.png" width="80%"></p>
+<p align="center"><img src="/img/dynamic_proxy/jdk.png" width="80%"></p>
+<p align="center"><img src="/img/dynamic_proxy/jdk_1.png" width="80%"></p>
 
 `인터페이스를 기반`으로 프록시 객체를 동적으로 런타임에 만들어준다.
 JDK 동적 프록시에 적용할 로직은 `InvocationHandler` 인터페이스 구현해서 작성한다
@@ -35,7 +35,7 @@ JDK 동적 프록시는 인터페이스가 필수이기 때문에, 구현 클래
 
 ## CGLIB (Code Generate Library)
 
-<p align="center"><img src="/img/cg.png" width="80%"></p>
+<p align="center"><img src="/img/dynamic_proxy/cg.png" width="80%"></p>
 
 인터페이스가 아니더라도 프록시를 적용할 수 있는 방법. `MehtodInterceptor`의 구현을 통해 작성한다
 
@@ -51,7 +51,7 @@ JDK 동적 프록시는 인터페이스가 필수이기 때문에, 구현 클래
 
 ## ProxyFactory
 
-<p align="center"><img src="/img/pf.png" width="80%"></p>
+<p align="center"><img src="/img/dynamic_proxy/pf.png" width="80%"></p>
 
 이전 동적 프록시 기술의 한계
 
@@ -59,7 +59,7 @@ JDK 동적 프록시는 인터페이스가 필수이기 때문에, 구현 클래
 - 두 기술을 함께 사용할 때, 부가기능을 제공하기 위한 클래스는 각각 `InvocationHandler`와 `MethodInterceptor`인데 이를 각각 개발해야 하나
 - 특정 조건에 따라 프록시 로직을 적용하는 기능도 공통화 시켜야하나
 
-<p align="center"><img src="/img/pf_1.png" width="80%"></p>
+<p align="center"><img src="/img/dynamic_proxy/pf_1.png" width="80%"></p>
 
 스프링은 동적 프록시를 통합해서 편리하게 만들어주는 `ProxyFactory`라는 기능을 제공한다.
 이전에는 상황에 따라 JDK 동적프록시나 CGLIB 을 선택해야하지만, 프록시 팩토리를 사용하면 편리하게 동적 프록시를 생성할 수 있다.
@@ -71,7 +71,7 @@ JDK 동적 프록시는 인터페이스가 필수이기 때문에, 구현 클래
 
 ### 포인트 컷, 어드바이스, 어드바이저
 
-<p align="center"><img src="/img/pf_2.png" width="80%"></p>
+<p align="center"><img src="/img/dynamic_proxy/pf_2.png" width="80%"></p>
 
 
 포인트 컷(Pointcut)
@@ -113,7 +113,7 @@ JDK 동적 프록시는 인터페이스가 필수이기 때문에, 구현 클래
 
 ## 빈 후처리기 (Bean Post Processor)
 
-<p align="center"><img src="/img/bean.png" width="80%"></p>
+<p align="center"><img src="/img/dynamic_proxy/bean.png" width="80%"></p>
 
 `@Bean`이나 `ComponentScan`을 통해 스프링 빈을 등록하게 되면 위와 같은 순서로 스프링 빈 저장소에 등록하게된다.
 빈 후처리기는 `생성 후 등록을 할 시점(1->2)`에 조작을 가하고자 할 때 사용한다. 즉, 빈을 생성한 후 무언가를 처리하는 용도로
@@ -121,7 +121,7 @@ JDK 동적 프록시는 인터페이스가 필수이기 때문에, 구현 클래
 
 ### 과정
 
-<p align="center"><img src="/img/bean_1.png" width="80%"></p>
+<p align="center"><img src="/img/dynamic_proxy/bean_1.png" width="80%"></p>
 
 여기서 빈 후처리기의 `후 처리 작업`에서는 전달된 스프링 빈 객체를 조작하거나 아예 다른 객체로 바꿔치기 할 수 있다.
 
@@ -137,7 +137,7 @@ JDK 동적 프록시는 인터페이스가 필수이기 때문에, 구현 클래
 
 ## 스프링이 제공하는 빈 후처리기
 
-<p align="center"><img src="/img/bean_2.png" width="80%"></p>
+<p align="center"><img src="/img/dynamic_proxy/bean_2.png" width="80%"></p>
 
 - AutoProxyCreator
   - 스프링 부트의 자동 설정으로 `AnnotationAwareAspectJAutoProxyCreator`라는 빈 후처리기가 스프링 빈에 자동 등록된다
@@ -153,3 +153,21 @@ JDK 동적 프록시는 인터페이스가 필수이기 때문에, 구현 클래
 2. 어드바이스 적용 여부 판단 - 사용
    - 프록시가 호출되었을 때 부가기능인 어드바이스를 적용할지 말지를 판단
    - 프록시로 생성된 클래스 중에서도 어드바이스가 적용하지 말아야할 메서드가 존재할 수 있으므로.
+
+## @Aspect Proxy
+
+<p align="center"><img src="/img/dynamic_proxy/aspect.png" width="80%"></p>
+
+이전에 작성한 `AutoProxyConfig`를 보면 어드바이저를 스프링빈으로 등록하고 자동 프록시 생성기로 프록시를 자동으로 생성해준다.
+스프링에서는 `@Aspect` 어노테이션으로 편리하게 포인트컷과 어드바이스로 구성된 어드바이저 생성 기능을 제공한다
+> `@Aspect`는 AOP 를 가능하게하는 AspectJ 프로젝트에서 제공하는 어노테이션
+
+<p align="center"><img src="/img/dynamic_proxy/aspect_1.png" width="80%"></p>
+
+앞서 자동 프록시 생성기였던, `AnnotationAwareAspectJAutoProxyCreator`은 
+- 빈으로 등록된 `Advisor`을 찾아서 등록해주는 기능
+- `@Aspect` 어노테이션을 찾아서 `Advisor`로 만들어 변환 후 저장한다.
+
+최종적으로 어드바이저를 기반으로 프록시를 생성하는 과정은 다음과 같다.
+
+<p align="center"><img src="/img/dynamic_proxy/aspect_2.png" width="80%"></p>
