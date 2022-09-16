@@ -6,11 +6,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import study.aop.order.OrderRepository;
 import study.aop.order.OrderService;
+import study.aop.order.aop.AspectV6Advice;
 
 @Slf4j
 @SpringBootTest
+//@Import(AspectV1.class)
+//@Import(AspectV2.class)
+//@Import(AspectV3.class)
+//@Import(AspectV4Pointcut.class)
+//@Import({AspectV5Order.LogAspect.class, AspectV5Order.TransactionAspect.class})
+@Import(AspectV6Advice.class)
 public class AopTest {
 
     @Autowired
@@ -36,3 +44,4 @@ public class AopTest {
                 .isInstanceOf(IllegalStateException.class);
     }
 }
+
