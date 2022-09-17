@@ -170,3 +170,70 @@ public class AspectV5Order {
 사실상 `@Around`만 있으면 다른 어드바이스의 기능을 모두 사용할 수 있다. 하지만, 조인 포인트 실행 여부를 선택할 수 있다는
 장점이 한편으론 실수로 호출하지 않는 상황이 발생하여 심각한 버그가 발생할 수 있다. 따라서, 다른 어드바이스를 통해 실수의 가능성을
 줄이고 코드가 간결해진다. 또한 어노테이션 자체가 실행 위치를 한정하기 때문에 의도를 파악하기 쉬워진.
+
+## Pointcut Detail
+
+### Pointcut Designator(PCD, 포인트컷 지시자)
+
+- execution
+  - 메소드 실행 조인 포인트 매칭
+  - 스프링 AOP 에서 가장 많이 사용하고 기능도 복잡하다
+- within
+  - 특정 타입 내의 조인포인트를 매칭
+- args
+  - 인자가 주어진 타입의 인스턴스 조인 포인트
+- this
+  - 스프링 빈 객체(스프링 AOP 프록시)를 대상으로 하는 조인포인트
+- target
+  - Target 객체(스프링 AOP 프록시가 가리키는 실제 대상)를 대상으로 하는 조인포인트
+- @target
+  - 실행 객체의 클래스에 위 어노테이션이 있는 조인포인트
+- @within
+  - 위 어노테이션이 있는 타입 내 조인포인트
+- @annotation
+  - 메서드가 위 어노테이션을 가지고 있는 조인포인트를 매칭
+- @args
+  - 전달된 실제 인수의 런타임 타입이 위 어노테이션을 갖는 조인 포인트
+- bean
+  - 스프링 전용 포인트컷 지시자
+  - 빈의 이름으로 포인트 컷을 지정
+
+사실상, `execution`을 가장 많이 사용하고 나머지는 자주 사용되지는 않는다.
+
+### execution
+
+```text
+execution(modifiers-pattern? ret-type-pattern declaring-type-pattern?namepattern(param-pattern)
+ throws-pattern?)
+ 
+execution(접근제어자? 반환타입 선언타입?메서드이름(파라미터) 예외?)
+```
+
+- `?`는 생략 가능
+- pattern 이라고 붙어있는데 `*`과 같은 패턴을 지정할 수 있다는 의미
+- 메소드 실행 조인 포인트를 매칭한다
+- Detail
+  - 접근 제어자 : public (생략 가능)
+  - 반환타입 : String
+  - 선업타입 : study.aop.member.MemberServiceImpl(생략가능)
+  - 메서드 이름: hello
+  - 파라미터 : String
+  - 예외 : 생략 가능
+- 하위 패키지를 포함하기 위해선 `..`을 사용해야 한다
+- execution 에서 부모타입을 선언해도 자식 타입은 매칭된다
+  - 하지만, 부모타입에 있는 메서드(override)만 허용된다.
+
+### within
+
+해당 타입이 매칭되면 그 안의 메서드들은 자동으로 매칭된다. execution 에서 타입부분만 사용한다고 보면된다.
+
+- 주의점
+  - 표현식에 부모타입을 지정하면 안된다
+
+### args
+
+execution 의 args 부분과 같다고 보면된다.
+
+- 차이점
+  - execution 은 타입이 정확하게 매칭되야 하지만, args 는 부모타입을 허용한다.
+  - execution 은 클래스에 선언된 정보를 기반으로 판단하지만, args 는 실제 넘어온 파라미터 객체 인스턴스롤 보고 판단한다.
