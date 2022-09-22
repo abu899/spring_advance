@@ -1,0 +1,5 @@
+spring:
+  aop:
+    proxy-target-class: false # true(default) 시, 무조건 cglib 로 생성
+  main:
+    allow-circular-references: true
